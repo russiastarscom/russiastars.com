@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Russia Stars</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400;700&display=swap">
+    <style>
+        :root {
+            --primary: #e62429;
+            --secondary: #111;
+            --accent: #f0f0f0;
+            --text: #fff;
+            --card-bg: rgba(0, 0, 0, 0.7);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #000;
+            color: var(--text);
+            background-image: url('https://images.unsplash.com/photo-1511512578047-dfb367046420?ixlib=rb-1.2.1&auto=format&fit=crop&w=1351&q=80');
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
+            min-height: 100vh;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: -1;
+        }
+
+        header {
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.7));
+            padding: 1rem;
+            border-bottom: 2px solid var(--primary);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(5px);
+        }
+
+        .logo {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
+            color: var(--primary);
+            text-align: center;
+            text-shadow: 0 0 10px rgba(230, 36, 41, 0.7);
+            letter-spacing: 2px;
+            margin-bottom: 0.5rem;
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .nav-btn {
+            background: none;
+            border: none;
+            color: var(--accent);
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1rem;
+            cursor: pointer;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .nav-btn:hover, .nav-btn.active {
+            background-color: var(--primary);
+            color: var(--secondary);
+            font-weight: bold;
+        }
+
+        .language-selector {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+        }
+
+        .language-btn {
+            background: var(--secondary);
+            color: var(--accent);
+            border: 1px solid var(--primary);
+            padding: 0.3rem 0.6rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 2rem;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 3px;
+            background: var(--primary);
+            margin: 0.5rem auto;
+        }
+
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .game-card {
+            background: var(--card-bg);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid var(--primary);
+            backdrop-filter: blur(5px);
+        }
+
+        .game-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(230, 36, 41, 0.3);
+        }
+
+        .game-icon {
+            width: 100%;
+            height: 180px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 5rem;
+            border-bottom: 2px solid var(--primary);
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        .game-info {
+            padding: 1.5rem;
+        }
+
+        .game-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.3rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .game-genre {
+            color: var(--accent);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            opacity: 0.8;
+        }
+
+        .download-btn {
+            display: block;
+            width: 100%;
+            padding: 0.8rem;
+            background: var(--primary);
+            color: var(--secondary);
+            text-align: center;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .download-btn:hover {
+            background: #ff3a3f;
+        }
+
+        .coming-soon {
+            text-align: center;
+            padding: 5rem 2rem;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+
+        .coming-soon-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .support-section {
+            background: var(--card-bg);
+            border-radius: 8px;
+            padding: 2rem;
+            margin-top: 3rem;
+            border: 1px solid var(--primary);
+            backdrop-filter: blur(5px);
+        }
+
+        .support-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .support-email {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            color: var(--accent);
+            font-size: 1.1rem;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        .support-email:hover {
+            color: var(--primary);
+        }
+
+        .support-email::before {
+            content: '✉️';
+        }
+
+        footer {
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.7));
+            padding: 2rem 1rem;
+            text-align: center;
+            border-top: 2px solid var(--primary);
+            margin-top: 3rem;
+        }
+
+        .footer-text {
+            color: var(--accent);
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .logo {
+                font-size: 2rem;
+            }
+            
+            nav {
+                flex-wrap: wrap;
+                gap: 0.5rem;
+            }
+            
+            .nav-btn {
+                font-size: 0.9rem;
+                padding: 0.3rem 0.6rem;
+            }
+            
+            .games-grid {
+                grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            }
+            
+            .game-icon {
+                height: 150px;
+                font-size: 4rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 1.8rem;
+                padding-top: 1.5rem;
+            }
+            
+            .language-selector {
+                position: static;
+                text-align: center;
+                margin-top: 1rem;
+            }
+            
+            .games-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .game-icon {
+                height: 120px;
+                font-size: 3.5rem;
+            }
+            
+            .support-email {
+                font-size: 1rem;
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">RUSSIA <span>STARS</span></div>
+        <div class="language-selector">
+            <select id="languageSelect" class="language-btn">
+                <option value="ru">Русский</option>
+                <option value="uk">Українська</option>
+                <option value="be">Беларуская</option>
+                <option value="en">English</option>
+                <option value="de">Deutsch</option>
+                <option value="fr">Français</option>
+            </select>
+        </div>
+        <nav>
+            <button class="nav-btn active" data-section="mobile">Мобильные</button>
+            <button class="nav-btn" data-section="pc">ПК</button>
+        </nav>
+    </header>
+
+    <div class="container">
+        <section id="mobile-section">
+            <h2 class="section-title" data-i18n="mobile_games">Мобильные игры</h2>
+            <div class="games-grid">
+                <div class="game-card">
+                    <div class="game-icon">🎮</div>
+                    <div class="game-info">
+                        <h3 class="game-title" data-i18n="dmircase_title">Dmircase</h3>
+                        <p class="game-genre" data-i18n="case_simulator">Симулятор кейсов</p>
+                        <a href="https://apps.rustore.ru/app/com.dmirev.dmircase" class="download-btn" data-i18n="download">Скачать</a>
+                    </div>
+                </div>
+
+                <div class="game-card">
+                    <div class="game-icon">🕹️</div>
+                    <div class="game-info">
+                        <h3 class="game-title">CATGO</h3>
+                        <p class="game-genre" data-i18n="skate_simulator">Симулятор скейтера</p>
+                        <a href="https://apps.rustore.ru/app/com.rsg.app.Endless_Skateborder_master" class="download-btn" data-i18n="download">Скачать</a>
+                    </div>
+                </div>
+
+                <div class="game-card">
+                    <div class="game-icon">🎮</div>
+                    <div class="game-info">
+                        <h3 class="game-title" data-i18n="dmircase_pro_title">Dmircase Pro</h3>
+                        <p class="game-genre" data-i18n="case_simulator">Симулятор кейсов</p>
+                        <a href="https://apps.rustore.ru/app/com.dmirev.dmircasepro" class="download-btn" data-i18n="download">Скачать</a>
+                    </div>
+                </div>
+
+                <div class="game-card">
+                    <div class="game-icon">🕹️</div>
+                    <div class="game-info">
+                        <h3 class="game-title">Rsgcopy</h3>
+                        <p class="game-genre" data-i18n="link_shortener">Приложение для сокращения ссылок</p>
+                        <a href="https://apps.rustore.ru/app/com.russiastars.app.dv" class="download-btn" data-i18n="download">Скачать</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="pc-section" style="display: none;">
+            <div class="coming-soon">
+                <span class="coming-soon-icon">🚧</span>
+                <p data-i18n="in_development">Раздел в разработке</p>
+            </div>
+        </section>
+
+        <section class="support-section">
+            <h3 class="support-title" data-i18n="support_title">Техническая поддержка</h3>
+            <p style="text-align: center; color: var(--accent);" data-i18n="support_text">Если у вас возникли вопросы или проблемы, свяжитесь с нами:</p>
+            <a href="mailto:russia_stars@internet.ru" class="support-email">russia_stars@internet.ru</a>
+        </section>
+    </div>
+
+    <footer>
+        <p class="footer-text" data-i18n="copyright">© 2023 Russia Stars. Все права защищены.</p>
+    </footer>
+
+    <script>
+        // Language translations
+        const translations = {
+            ru: {
+                mobile_games: "Мобильные игры",
+                pc_games: "Игры для ПК",
+                dmircase_title: "Dmircase",
+                dmircase_pro_title: "Dmircase Pro",
+                case_simulator: "Симулятор кейсов",
+                skate_simulator: "Симулятор скейтера",
+                link_shortener: "Приложение для сокращения ссылок",
+                download: "Скачать",
+                in_development: "Раздел в разработке",
+                support_title: "Техническая поддержка",
+                support_text: "Если у вас возникли вопросы или проблемы, свяжитесь с нами:",
+                copyright: "© 2023 Russia Stars. Все права защищены."
+            },
+            uk: {
+                mobile_games: "Мобільні ігри",
+                pc_games: "Ігри для ПК",
+                dmircase_title: "Dmircase",
+                dmircase_pro_title: "Dmircase Pro",
+                case_simulator: "Симулятор кейсів",
+                skate_simulator: "Симулятор скейтбордиста",
+                link_shortener: "Додаток для скорочення посилань",
+                download: "Завантажити",
+                in_development: "Розділ у розробці",
+                support_title: "Технічна підтримка",
+                support_text: "Якщо у вас виникли питання або проблеми, зв'яжіться з нами:",
+                copyright: "© 2023 Russia Stars. Усі права захищені."
+            },
+            be: {
+                mobile_games: "Мабільныя гульні",
+                pc_games: "Гульні для ПК",
+                dmircase_title: "Dmircase",
+                dmircase_pro_title: "Dmircase Pro",
+                case_simulator: "Сімулятар кейсаў",
+                skate_simulator: "Сімулятар скейтбордыста",
+                link_shortener: "Праграма для скарачэння спасылак",
+                download: "Спампаваць",
+                in_development: "Раздзел у распрацоўцы",
+                support_title: "Тэхнічная падтрымка",
+                support_text: "Калі ў вас узніклі пытанні або праблемы, звязацца з намі:",
+                copyright: "© 2023 Russia Stars. Усе правы абаронены."
+            },
+            en: {
+                mobile_games: "Mobile Games",
+                pc_games: "PC Games",
+                dmircase_title: "Dmircase",
+                dmircase_pro_title: "Dmircase Pro",
+                case_simulator: "Case simulator",
+                skate_simulator: "Skateboard simulator",
+                link_shortener: "Link shortener app",
+                download: "Download",
+                in_development: "Section in development",
+                support_title: "Technical Support",
+                support_text: "If you have any questions or issues, please contact us:",
+                copyright: "© 2023 Russia Stars. All rights reserved."
+            },
+            de: {
+                mobile_games: "Mobile Spiele",
+                pc_games: "PC-Spiele",
+                dmircase_title: "Dmircase",
+                dmircase_pro_title: "Dmircase Pro",
+                case_simulator: "Case-Simulator",
+                skate_simulator: "Skateboard-Simulator",
+                link_shortener: "Link-Verkürzer-App",
+                download: "Herunterladen",
+                in_development: "Bereich in Entwicklung",
+                support_title: "Technischer Support",
+                support_text: "Wenn Sie Fragen oder Probleme haben, kontaktieren Sie uns:",
+                copyright: "© 2023 Russia Stars. Alle Rechte vorbehalten."
+            },
+            fr: {
+                mobile_games: "Jeux mobiles",
+                pc_games: "Jeux PC",
+                dmircase_title: "Dmircase",
+                dmircase_pro_title: "Dmircase Pro",
+                case_simulator: "Simulateur de cas",
+                skate_simulator: "Simulateur de skateboard",
+                link_shortener: "Application de raccourcissement de liens",
+                download: "Télécharger",
+                in_development: "Section en développement",
+                support_title: "Support technique",
+                support_text: "Si vous avez des questions ou des problèmes, contactez-nous:",
+                copyright: "© 2023 Russia Stars. Tous droits réservés."
+            }
+        };
+
+        // Auto-detect language
+        function detectLanguage() {
+            const userLang = navigator.language || navigator.userLanguage;
+            const supportedLangs = ['ru', 'uk', 'be', 'en', 'de', 'fr'];
+            const primaryLang = userLang.substring(0, 2);
+            
+            if (supportedLangs.includes(primaryLang)) {
+                return primaryLang;
+            }
+            return 'ru'; // default
+        }
+
+        // Apply translations
+        function applyTranslations(lang) {
+            document.querySelectorAll('[data-i18n]').forEach(element => {
+                const key = element.getAttribute('data-i18n');
+                if (translations[lang] && translations[lang][key]) {
+                    element.textContent = translations[lang][key];
+                }
+            });
+        }
+
+        // Initialize language
+        function initLanguage() {
+            const savedLang = localStorage.getItem('russiaStarsLang');
+            const lang = savedLang || detectLanguage();
+            
+            document.getElementById('languageSelect').value = lang;
+            applyTranslations(lang);
+        }
+
+        // Navigation between sections
+        document.querySelectorAll('.nav-btn').forEach(button => {
+            button.addEventListener('click', () => {
+                const section = button.getAttribute('data-section');
+                
+                // Update active button
+                document.querySelectorAll('.nav-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                button.classList.add('active');
+                
+                // Show/hide sections
+                if (section === 'mobile') {
+                    document.getElementById('mobile-section').style.display = 'block';
+                    document.getElementById('pc-section').style.display = 'none';
+                } else {
+                    document.getElementById('mobile-section').style.display = 'none';
+                    document.getElementById('pc-section').style.display = 'block';
+                }
+            });
+        });
+
+        // Language change handler
+        document.getElementById('languageSelect').addEventListener('change', (e) => {
+            const lang = e.target.value;
+            localStorage.setItem('russiaStarsLang', lang);
+            applyTranslations(lang);
+        });
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', initLanguage);
+    </script>
+</body>
+</html>
