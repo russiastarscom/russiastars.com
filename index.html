@@ -25,7 +25,7 @@
         "url": "https://russiastarscom.github.io/russiastars.com/",
         "logo": "https://russiastars.example.com/images/logo.jpg",
         "sameAs": [
-
+            "https://youtube.com/@russiastarsoficialstudio",
             "https://t.me/BagrovStudio1244"
         ]
     }
@@ -282,6 +282,26 @@
             content: '✉️';
         }
 
+        .support-youtube {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            color: var(--accent);
+            font-size: 1.1rem;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        .support-youtube:hover {
+            color: var(--primary);
+        }
+
+        .support-youtube::before {
+            content: '▶️';
+        }
+
         footer {
             background: linear-gradient(to top, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.7));
             padding: 2rem 1rem;
@@ -342,7 +362,8 @@
                 font-size: 3.5rem;
             }
             
-            .support-email {
+            .support-email,
+            .support-youtube {
                 font-size: 1rem;
                 flex-direction: column;
             }
@@ -421,6 +442,7 @@
             <h2 class="support-title" data-i18n="support_title">Техническая поддержка</h2>
             <p style="text-align: center; color: var(--accent);" data-i18n="support_text">Если у вас возникли вопросы или проблемы, свяжитесь с нами:</p>
             <a href="mailto:russia_stars@internet.ru" class="support-email" aria-label="Написать в поддержку Russia Stars">russia_stars@internet.ru</a>
+            <a href="https://youtube.com/@russiastarsoficialstudio?si=UBuQXRGXNS-TB240" class="support-youtube" aria-label="Наш YouTube канал" target="_blank">YouTube канал</a>
         </section>
     </div>
 
@@ -581,4 +603,4 @@
         document.addEventListener('DOMContentLoaded', initLanguage);
     </script>
 </body>
-</html>
+</html>д
